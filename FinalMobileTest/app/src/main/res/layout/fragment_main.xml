@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainFragment">
+
+
+    <TextView
+        android:layout_marginStart="27dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="37dp"
+        android:text="Explore"
+        android:fontFamily="@font/kaisentokumin_extrabold"
+        android:textSize="32sp"
+        android:textColor="@color/black"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Awesome quotes from famous people"
+        android:fontFamily="@font/poppins_medium"
+        android:layout_marginStart="27dp"
+        android:textSize="15sp"
+        />
+
+    <HorizontalScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Random"
+                android:fontFamily="@font/poppins_regular"
+                android:backgroundTint="@color/black"
+                android:textColor="@color/white"
+                android:layout_marginEnd="10dp"
+                android:textSize="15sp"
+                app:cornerRadius="7dp"
+                app:strokeWidth="2dp" />
+
+            <Button
+                android:id="@+id/btn_love"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Love"
+                android:fontFamily="@font/poppins_regular"
+                android:backgroundTint="@color/black"
+                android:textColor="@color/white"
+                android:layout_marginEnd="10dp"
+                android:textSize="15sp"
+                app:cornerRadius="7dp"
+                app:strokeWidth="2dp" />
+
+            <Button
+                android:id="@+id/btn_sad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sad"
+                android:fontFamily="@font/poppins_regular"
+                android:backgroundTint="@color/black"
+                android:textColor="@color/white"
+                android:layout_marginEnd="10dp"
+                android:textSize="15sp"
+                app:cornerRadius="7dp"
+                app:strokeWidth="2dp" />
+
+            <Button
+                android:id="@+id/btn_happiness"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Happiness"
+                android:fontFamily="@font/poppins_regular"
+                android:backgroundTint="@color/black"
+                android:textColor="@color/white"
+                android:layout_marginEnd="10dp"
+                android:textSize="15sp"
+                app:cornerRadius="7dp"
+                app:strokeWidth="2dp" />
+
+            <Button
+                android:id="@+id/btn_peace"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Peace"
+                android:fontFamily="@font/poppins_regular"
+                android:backgroundTint="@color/black"
+                android:textColor="@color/white"
+                android:layout_marginEnd="10dp"
+                android:textSize="15sp"
+                app:cornerRadius="7dp"
+                app:strokeWidth="2dp" />
+
+            <Button
+                android:id="@+id/btn_birthday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Birthday"
+                android:fontFamily="@font/poppins_regular"
+                android:backgroundTint="@color/black"
+                android:textColor="@color/white"
+                android:layout_marginEnd="10dp"
+                android:textSize="15sp"
+                app:cornerRadius="7dp"
+                app:strokeWidth="2dp" />
+
+            <Button
+                android:id="@+id/btn_death"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Death"
+                android:fontFamily="@font/poppins_regular"
+                android:backgroundTint="@color/black"
+                android:textColor="@color/white"
+                android:layout_marginEnd="10dp"
+                android:textSize="15sp"
+                app:cornerRadius="7dp"
+                app:strokeWidth="2dp" />
+
+            <Button
+                android:id="@+id/btn_education"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Education"
+                android:fontFamily="@font/poppins_regular"
+                android:backgroundTint="@color/black"
+                android:textColor="@color/white"
+                android:layout_marginEnd="10dp"
+                android:textSize="15sp"
+                app:cornerRadius="7dp"
+                app:strokeWidth="2dp" />
+
+            <Button
+                android:id="@+id/btn_family"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Family"
+                android:fontFamily="@font/poppins_regular"
+                android:backgroundTint="@color/black"
+                android:textColor="@color/white"
+                android:layout_marginEnd="10dp"
+                android:textSize="15sp"
+                app:cornerRadius="7dp"
+                app:strokeWidth="2dp" />
+
+            <Button
+                android:id="@+id/btn_funny"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Funny"
+                android:fontFamily="@font/poppins_regular"
+                android:backgroundTint="@color/black"
+                android:textColor="@color/white"
+                android:layout_marginEnd="10dp"
+                android:textSize="15sp"
+                app:cornerRadius="7dp"
+                app:strokeWidth="2dp" />
+
+            <Button
+                android:id="@+id/btn_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Time"
+                android:fontFamily="@font/poppins_regular"
+                android:backgroundTint="@color/black"
+                android:textColor="@color/white"
+                android:layout_marginEnd="10dp"
+                android:textSize="15sp"
+                app:cornerRadius="7dp"
+                app:strokeWidth="2dp" />
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="10dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:layout_marginBottom="100dp"
+        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+        tools:listitem="@layout/user_item"
+        />
+
+</LinearLayout>
