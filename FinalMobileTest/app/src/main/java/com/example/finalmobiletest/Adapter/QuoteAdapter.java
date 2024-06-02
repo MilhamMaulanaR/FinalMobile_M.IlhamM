@@ -1,14 +1,17 @@
-package com.example.finalmobiletest;
+package com.example.finalmobiletest.Adapter;
 
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.finalmobiletest.Activity.Quote;
+import com.example.finalmobiletest.Activity.QuoteDetail;
+import com.example.finalmobiletest.R;
 
 import java.util.List;
 

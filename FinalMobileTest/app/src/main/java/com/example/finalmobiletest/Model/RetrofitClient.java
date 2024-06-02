@@ -1,4 +1,4 @@
-package com.example.finalmobiletest;
+package com.example.finalmobiletest.Model;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

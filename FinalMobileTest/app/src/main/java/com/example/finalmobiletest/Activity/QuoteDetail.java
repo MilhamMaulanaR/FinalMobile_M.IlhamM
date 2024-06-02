@@ -1,4 +1,4 @@
-package com.example.finalmobiletest;
+package com.example.finalmobiletest.Activity;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -29,6 +28,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.finalmobiletest.Database.DatabaseHelper;
+import com.example.finalmobiletest.R;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -44,7 +45,7 @@ public class QuoteDetail extends AppCompatActivity {
     private Button btncopyquotedetail, btnDownloadQuoteDetail;
     private ImageView image;
     private View quoteContainer;
-    RelativeLayout download;
+    private RelativeLayout download;
     private ProgressBar progressBar;
     private DatabaseHelper myDB;
     private HandlerThread handlerThread;
@@ -56,6 +57,8 @@ public class QuoteDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_quote_detail);
+
+        // Mengatur padding untuk view utama agar tidak tertutup oleh sistem bar
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -76,8 +79,10 @@ public class QuoteDetail extends AppCompatActivity {
         image = findViewById(R.id.image);
         quoteContainer = findViewById(R.id.main);
         download = findViewById(R.id.download);
-        myDB = new DatabaseHelper(this);
         progressBar = findViewById(R.id.progress_bar);
+
+        // Inisialisasi DatabaseHelper
+        myDB = new DatabaseHelper(this);
 
         // Inisialisasi HandlerThread dan Handlers
         handlerThread = new HandlerThread("SaveImageThread");
@@ -85,12 +90,13 @@ public class QuoteDetail extends AppCompatActivity {
         backgroundHandler = new Handler(handlerThread.getLooper());
         mainHandler = new Handler(getMainLooper());
 
+        // Mengambil data dari Intent
         Intent intent = getIntent();
         String author = intent.getStringExtra("author");
         String text = intent.getStringExtra("text");
-        String kategory = intent.getStringExtra("category");
+        String category = intent.getStringExtra("category");
 
-        //kirim data user
+        // Mengambil data user dari SharedPreferences
         SharedPreferences sharedPreferences = getSharedPreferences("user", MODE_PRIVATE);
         String username = sharedPreferences.getString("username", "");
         SharedPreferences preferencesName = getSharedPreferences("Name", MODE_PRIVATE);
@@ -98,35 +104,41 @@ public class QuoteDetail extends AppCompatActivity {
 
         Log.d("QuoteDetail", "Attempting to load image into ImageView");
 
+        // Membuat URL gambar dengan waktu saat ini untuk menghindari cache
         String url = "https://picsum.photos/200/300?grayscale&random=" + System.currentTimeMillis();
 
+        // Mengatur listener untuk tombol salin kutipan
         btncopyquotedetail.setOnClickListener(v -> copyQuoteToClipboard());
 
+        // Mengatur listener untuk tombol unduh kutipan
         btnDownloadQuoteDetail.setOnClickListener(v -> {
             progressBar.setVisibility(View.VISIBLE);
             backgroundHandler.post(() -> saveQuoteImage());
         });
 
+        // Mengatur listener untuk tombol bookmark
         bookmarkQuoteDetail.setOnClickListener(v -> {
             int quoteId = intent.getIntExtra("id", 0);
             int idUser = myDB.getUserId(username);
-            myDB.insertBookmarkQuote(quoteId, idUser, text, author, kategory);
+            myDB.insertBookmarkQuote(quoteId, idUser, text, author, category);
             Toast.makeText(QuoteDetail.this, "Quote added to bookmarks", Toast.LENGTH_SHORT).show();
         });
 
-        // Load image using Glide, bypassing the cache
+        // Memuat gambar menggunakan Glide, dengan mengabaikan cache
         Glide.with(this)
                 .load(url)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .skipMemoryCache(true)
                 .into(image);
 
+        // Mengatur teks untuk berbagai view
         authorQuoteDetail.setText(author);
         quoteDetail.setText(text);
-        kategoriQuoteDetail.setText(kategory);
+        kategoriQuoteDetail.setText(category);
         quoteDetailName.setText(name);
         quoteDetailUsername.setText("@" + username); // Menambahkan "@" di depan username
 
+        // Mengatur listener untuk tombol kembali
         btnBackDetail.setOnClickListener(v -> finish());
     }
 
@@ -136,6 +148,7 @@ public class QuoteDetail extends AppCompatActivity {
         handlerThread.quitSafely();
     }
 
+    // Fungsi untuk menyalin kutipan ke clipboard
     private void copyQuoteToClipboard() {
         String quote = quoteDetail.getText().toString();
         ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
@@ -144,6 +157,7 @@ public class QuoteDetail extends AppCompatActivity {
         Toast.makeText(this, "Quote copied to clipboard", Toast.LENGTH_SHORT).show();
     }
 
+    // Fungsi untuk menyimpan gambar kutipan
     private void saveQuoteImage() {
         Bitmap bitmap = getBitmapFromView(download);
         String fileName = "Quotable" + System.currentTimeMillis() + ".png";
@@ -166,6 +180,7 @@ public class QuoteDetail extends AppCompatActivity {
         }
     }
 
+    // Fungsi untuk mendapatkan bitmap dari view
     private Bitmap getBitmapFromView(View view) {
         Bitmap bitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);

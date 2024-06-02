@@ -1,4 +1,4 @@
-package com.example.finalmobiletest;
+package com.example.finalmobiletest.Activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,6 +12,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.finalmobiletest.ApiService;
+import com.example.finalmobiletest.Fragment.MainFragment;
+import com.example.finalmobiletest.Fragment.ProfileFragment;
+import com.example.finalmobiletest.R;
+import com.example.finalmobiletest.Model.RetrofitClient;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {

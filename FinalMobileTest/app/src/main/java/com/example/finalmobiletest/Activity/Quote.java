@@ -1,4 +1,4 @@
-package com.example.finalmobiletest;
+package com.example.finalmobiletest.Activity;
 
 import com.google.gson.annotations.SerializedName;
 

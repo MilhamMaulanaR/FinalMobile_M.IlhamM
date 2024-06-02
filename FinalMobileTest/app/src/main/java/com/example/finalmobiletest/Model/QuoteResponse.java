@@ -1,4 +1,6 @@
-package com.example.finalmobiletest;
+package com.example.finalmobiletest.Model;
+
+import com.example.finalmobiletest.Activity.Quote;
 
 import java.util.List;
 

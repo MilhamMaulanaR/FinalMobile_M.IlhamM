@@ -1,4 +1,4 @@
-package com.example.finalmobiletest;
+package com.example.finalmobiletest.Fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +11,12 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
+import com.example.finalmobiletest.ApiService;
+import com.example.finalmobiletest.Activity.Quote;
+import com.example.finalmobiletest.Adapter.QuoteAdapter;
+import com.example.finalmobiletest.R;
+import com.example.finalmobiletest.Model.RetrofitClient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +35,7 @@ public class MainFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Initialize API service and quotes list
         apiService = RetrofitClient.getQuotesClient().create(ApiService.class);
         quotesList = new ArrayList<>();
     }
@@ -50,7 +57,7 @@ public class MainFragment extends Fragment {
         btn_time = view.findViewById(R.id.btn_time);
         btn_all = view.findViewById(R.id.btn_all);
 
-        // Set tags
+        // Set tags for buttons
         btn_love.setTag("love");
         btn_sad.setTag("sad");
         btn_happiness.setTag("happiness");
@@ -63,17 +70,20 @@ public class MainFragment extends Fragment {
         btn_time.setTag("time");
         btn_all.setTag("all");
 
+        // Initialize RecyclerView with StaggeredGridLayoutManager
         recyclerView = view.findViewById(R.id.recyclerView);
         StaggeredGridLayoutManager staggeredGridLayoutManager =
                 new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(staggeredGridLayoutManager);
 
-        // Initialize adapter
+        // Initialize adapter and set it to RecyclerView
         quoteAdapter = new QuoteAdapter(quotesList);
         recyclerView.setAdapter(quoteAdapter);
 
+        // Fetch initial quotes
         fetchQuotes("all", 20);
-        // Set onClickListeners
+
+        // Set onClickListeners for buttons
         setOnClickListener(btn_love);
         setOnClickListener(btn_sad);
         setOnClickListener(btn_happiness);
@@ -89,6 +99,7 @@ public class MainFragment extends Fragment {
         return view;
     }
 
+    // Method to set onClickListener for buttons
     private void setOnClickListener(Button button) {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,6 +113,7 @@ public class MainFragment extends Fragment {
         });
     }
 
+    // Method to fetch quotes from API
     private void fetchQuotes(String category, int count) {
         Call<List<Quote>> call = apiService.getQuotes(category, count);
         call.enqueue(new Callback<List<Quote>>() {
@@ -124,20 +136,19 @@ public class MainFragment extends Fragment {
         });
     }
 
-
-    public void ResetButtonColors (){
-//        btn_all.setBackgroundColor(ContextCompat.getColor(getContext(),android.R.color.transparent));
-        btn_love.setBackgroundColor(ContextCompat.getColor(getContext(),android.R.color.transparent));
-        btn_sad.setBackgroundColor(ContextCompat.getColor(getContext(),android.R.color.transparent));
-        btn_happiness.setBackgroundColor(ContextCompat.getColor(getContext(),android.R.color.transparent));
-        btn_peace.setBackgroundColor(ContextCompat.getColor(getContext(),android.R.color.transparent));
-        btn_birthday.setBackgroundColor(ContextCompat.getColor(getContext(),android.R.color.transparent));
-        btn_death.setBackgroundColor(ContextCompat.getColor(getContext(),android.R.color.transparent));
-        btn_education.setBackgroundColor(ContextCompat.getColor(getContext(),android.R.color.transparent));
-        btn_family.setBackgroundColor(ContextCompat.getColor(getContext(),android.R.color.transparent));
-        btn_funny.setBackgroundColor(ContextCompat.getColor(getContext(),android.R.color.transparent));
-        btn_time.setBackgroundColor(ContextCompat.getColor(getContext(),android.R.color.transparent));
-        btn_all.setBackgroundColor(ContextCompat.getColor(getContext(),android.R.color.transparent));
+    // Method to reset button colors
+    public void ResetButtonColors() {
+        btn_love.setBackgroundColor(ContextCompat.getColor(getContext(), android.R.color.transparent));
+        btn_sad.setBackgroundColor(ContextCompat.getColor(getContext(), android.R.color.transparent));
+        btn_happiness.setBackgroundColor(ContextCompat.getColor(getContext(), android.R.color.transparent));
+        btn_peace.setBackgroundColor(ContextCompat.getColor(getContext(), android.R.color.transparent));
+        btn_birthday.setBackgroundColor(ContextCompat.getColor(getContext(), android.R.color.transparent));
+        btn_death.setBackgroundColor(ContextCompat.getColor(getContext(), android.R.color.transparent));
+        btn_education.setBackgroundColor(ContextCompat.getColor(getContext(), android.R.color.transparent));
+        btn_family.setBackgroundColor(ContextCompat.getColor(getContext(), android.R.color.transparent));
+        btn_funny.setBackgroundColor(ContextCompat.getColor(getContext(), android.R.color.transparent));
+        btn_time.setBackgroundColor(ContextCompat.getColor(getContext(), android.R.color.transparent));
+        btn_all.setBackgroundColor(ContextCompat.getColor(getContext(), android.R.color.transparent));
 
         btn_love.setTextColor(ContextCompat.getColor(getContext(), R.color.white));
         btn_sad.setTextColor(ContextCompat.getColor(getContext(), R.color.white));
@@ -150,6 +161,5 @@ public class MainFragment extends Fragment {
         btn_funny.setTextColor(ContextCompat.getColor(getContext(), R.color.white));
         btn_time.setTextColor(ContextCompat.getColor(getContext(), R.color.white));
         btn_all.setTextColor(ContextCompat.getColor(getContext(), R.color.white));
-
     }
 }

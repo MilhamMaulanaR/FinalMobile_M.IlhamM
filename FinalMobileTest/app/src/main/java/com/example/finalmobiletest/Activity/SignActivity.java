@@ -1,4 +1,4 @@
-package com.example.finalmobiletest;
+package com.example.finalmobiletest.Activity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,6 +10,9 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.finalmobiletest.Database.DatabaseHelper;
+import com.example.finalmobiletest.R;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class SignActivity extends AppCompatActivity {

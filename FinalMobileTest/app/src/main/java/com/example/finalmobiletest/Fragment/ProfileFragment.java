@@ -1,10 +1,9 @@
-package com.example.finalmobiletest;
+package com.example.finalmobiletest.Fragment;
 
 import static android.content.Context.MODE_PRIVATE;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,6 +16,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import com.example.finalmobiletest.Model.Bookmark;
+import com.example.finalmobiletest.Database.DatabaseHelper;
+import com.example.finalmobiletest.Activity.Login;
+import com.example.finalmobiletest.R;
+import com.example.finalmobiletest.Adapter.bookmarkAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +61,7 @@ public class ProfileFragment extends Fragment {
         adapter = new bookmarkAdapter(getActivity(), bookmarks);
         recyclerView.setAdapter(adapter);
         loadData();
+
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("user", MODE_PRIVATE);
         String username = sharedPreferences.getString("username", "");
         SharedPreferences preferencesName = getContext().getSharedPreferences("Name", MODE_PRIVATE);
@@ -84,22 +90,19 @@ public class ProfileFragment extends Fragment {
         btn_back_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().onBackPressed();
+                getActivity().finishAffinity();
             }
         });
     }
 
-    public void loadData(){
-        DatabaseHelper myDB = new DatabaseHelper(getActivity());
-        Cursor cursor = myDB.getAllBookmark();
-        if(cursor.moveToFirst()){
-            do {
-                int id = cursor.getInt(cursor.getColumnIndexOrThrow("bookmark_id"));
-               String text = cursor.getString(cursor.getColumnIndexOrThrow("bookmark_title"));
-               String author = cursor.getString(cursor.getColumnIndexOrThrow("bookmark_author"));
-               String category = cursor.getString(cursor.getColumnIndexOrThrow("bookmark_kategori"));
-               bookmarks.add(new Bookmark(id ,text, author, category));
-            } while (cursor.moveToNext());
-        }
+    public void loadData() {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("user", MODE_PRIVATE);
+        String username = sharedPreferences.getString("username", "");
+        int userId = myDB.getUserId(username);
+        bookmarks.clear();
+        bookmarks.addAll(myDB.getBookmarksByUserId(userId));
+        adapter.notifyDataSetChanged();
     }
+
+
 }

@@ -1,4 +1,4 @@
-package com.example.finalmobiletest;
+package com.example.finalmobiletest.Adapter;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -12,6 +12,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.finalmobiletest.Model.Bookmark;
+import com.example.finalmobiletest.Database.DatabaseHelper;
+import com.example.finalmobiletest.R;
 
 import java.util.List;
 

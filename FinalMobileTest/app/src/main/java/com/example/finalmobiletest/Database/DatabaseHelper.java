@@ -1,4 +1,4 @@
-package com.example.finalmobiletest;
+package com.example.finalmobiletest.Database;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
+
+import com.example.finalmobiletest.Model.Bookmark;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -98,11 +100,43 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.insert(BOOKMARK_TABLE_NAME, null, values);
     }
 
+    public List<Bookmark> getBookmarksByUserId(int userId) {
+        List<Bookmark> bookmarkList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(
+                BOOKMARK_TABLE_NAME,
+                null,
+                BOOKMARK_COLUMN_USER_ID + "=?",
+                new String[]{String.valueOf(userId)},
+                null,
+                null,
+                null
+//                BOOKMARK_COLUMN_TIMESTAMP + " DESC"
+        );
+
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                int id = cursor.getInt(cursor.getColumnIndexOrThrow(BOOKMARK_COLUMN_ID));
+                String title = cursor.getString(cursor.getColumnIndexOrThrow(BOOKMARK_COLUMN_TITLE));
+                String author = cursor.getString(cursor.getColumnIndexOrThrow(BOOKMARK_COLUMN_AUTHOR));
+                String category = cursor.getString(cursor.getColumnIndexOrThrow(BOOKMARK_COLUMN_CATEGORY));
+                int quoteId = cursor.getInt(cursor.getColumnIndexOrThrow(BOOKMARK_COLUMN_QUOTE_ID));
+                Bookmark bookmark = new Bookmark(id, title, author, category, quoteId, userId);
+                bookmarkList.add(bookmark);
+            } while (cursor.moveToNext());
+        }
+
+        if (cursor != null) {
+            cursor.close();
+        }
+        db.close();
+        return bookmarkList;
+    }
+
     public Cursor getAllBookmark(){
         SQLiteDatabase db = getReadableDatabase();
         return db.rawQuery("SELECT * FROM " + BOOKMARK_TABLE_NAME, null);
     }
-
 
     public Set<Integer> getDestinationByUserIdBookmark(int userId) {
         Set<Integer> destinationSet = new HashSet<>();
@@ -141,11 +175,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return destinationSet;
     }
 
-
-    public boolean deletebookmark(int idQuotes, int userId) {
-        SQLiteDatabase db = getWritableDatabase();
-        return db.delete(BOOKMARK_TABLE_NAME, BOOKMARK_COLUMN_ID + "=? AND " + BOOKMARK_COLUMN_USER_ID + "=?", new String[]{String.valueOf(idQuotes), String.valueOf(userId)}) > 0;
-    }
     public int getUserId(String username) {
         SQLiteDatabase db = getReadableDatabase();
         String[] columns = {USER_COLUMN_ID};
@@ -160,6 +189,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return userId;
     }
+
+    public boolean deletebookmark(int idQuotes, int userId) {
+        SQLiteDatabase db = getWritableDatabase();
+        return db.delete(BOOKMARK_TABLE_NAME, BOOKMARK_COLUMN_ID + "=? AND " + BOOKMARK_COLUMN_USER_ID + "=?", new String[]{String.valueOf(idQuotes), String.valueOf(userId)}) > 0;
+    }
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

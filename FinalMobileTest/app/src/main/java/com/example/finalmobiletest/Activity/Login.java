@@ -1,4 +1,4 @@
-package com.example.finalmobiletest;
+package com.example.finalmobiletest.Activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,6 +10,8 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.finalmobiletest.Database.DatabaseHelper;
+import com.example.finalmobiletest.R;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class Login extends AppCompatActivity {
@@ -45,7 +47,6 @@ public class Login extends AppCompatActivity {
             String username = editTextUsername.getText().toString();
             String password = editTextPassword.getText().toString();
 
-            // Perform login logic here (e.g., authentication with server)
             // For demonstration, we'll just show a toast
             if (!username.isEmpty() && !password.isEmpty()) {
                 databaseHelper.checkUsernamePassword(username, password);
@@ -54,11 +55,11 @@ public class Login extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putBoolean("login", true);
                 editor.apply();
+
                 SharedPreferences preferencesUsername = Login.this.getSharedPreferences("user", MODE_PRIVATE);
                 SharedPreferences.Editor editorUser = preferencesUsername.edit();
                 editorUser.putString("username", username);
                 editorUser.apply();
-
 
                 Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(Login.this, MainActivity.class);

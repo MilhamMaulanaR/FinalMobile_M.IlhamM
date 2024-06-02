@@ -1,5 +1,7 @@
 package com.example.finalmobiletest;
 
+import com.example.finalmobiletest.Activity.Quote;
+
 import java.util.List;
 
 import retrofit2.Call;
