@@ -2,7 +2,7 @@
 
 **Quotable** adalah aplikasi mobile yang menyediakan berbagai kutipan (quotes) untuk membantu kesehatan mental Anda. Aplikasi ini dirancang agar pengguna dapat memilih kutipan acak dari berbagai genre yang dapat disalin dan diunduh. Informasi seperti penulis dan kategori juga disediakan.
 
-## Fitur
+## 🟢Fitur
 
 1. **Login dan Registrasi**
    - Pengguna dapat membuat akun baru atau masuk dengan akun yang sudah ada.
@@ -28,7 +28,7 @@
 8. **Logout**
    - Keluar dari akun pengguna.
 
-## Penggunaan
+##🟢 Penggunaan
 
 1. **Registrasi**
    - Membuat akun baru dengan mengisi username dan password.
@@ -54,7 +54,7 @@
 8. **Profile**
    - Menampilkan nama, username, deskripsi, dan kutipan yang telah dibookmark.
 
-## Teknologi yang Digunakan
+## 🟢Teknologi yang Digunakan
 
 1. **Android Studio**
    - Digunakan untuk mengembangkan aplikasi Quotable.
@@ -68,7 +68,7 @@
 4. **SQLite**
    - Basis data lokal yang digunakan untuk menyimpan informasi pengguna dan kutipan yang di-bookmark.
 
-## API
+## 🟢API
 Aplikasi ini menggunakan API dari RapidAPI untuk mendapatkan kutipan terkenal. 
 Berikut adalah tautan ke [API Famous Quotes](https://rapidapi.com/saicoder/api/famous-quotes4).
 
