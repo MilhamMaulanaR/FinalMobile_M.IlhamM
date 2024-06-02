@@ -28,7 +28,7 @@
 8. **Logout**
    - Keluar dari akun pengguna.
 
-##🟢 Penggunaan
+## 🟢Penggunaan
 
 1. **Registrasi**
    - Membuat akun baru dengan mengisi username dan password.
