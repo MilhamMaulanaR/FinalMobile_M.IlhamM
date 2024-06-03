@@ -67,9 +67,16 @@
 
 4. **SQLite**
    - Basis data lokal yang digunakan untuk menyimpan informasi pengguna dan kutipan yang di-bookmark.
+     
+5. **Glide**
+   - untuk mengambil random image untuk dijadikan sebagai latar belakang quote
 
 ## 🟢API
 Aplikasi ini menggunakan API dari RapidAPI untuk mendapatkan kutipan terkenal. 
 Berikut adalah tautan ke [API Famous Quotes](https://rapidapi.com/saicoder/api/famous-quotes4).
+
+# 🟢FIGMA
+Saya mendesain aplikasi ini di figma
+https://www.figma.com/design/7ekl5fAee6N8G1eRCxHdvY/Untitled?node-id=0-1&t=ORQBpHbvMT65DJwv-1
 
 
